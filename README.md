@@ -32,6 +32,42 @@ Streams can be created from `Collections`, `Lists`, `ints`, `longs`, `doubles`, 
 - Includes: `count()`, `max()`, `min()`, `reduce()`, `summaryStatistics()`
 
 
+### reduce
+```java
+    // Print out the sum of ages of all female authors younger than 25.
+        library.stream()
+          .map(Book::getAuthor)
+          .filter(author -> author.getGender() == Gender.FEMALE)
+          .map(Author::getAge)
+          .filter(age -> age < 25)
+          .reduce(0, Integer::sum)
+```
+### collect
+```java
+   Stream<String> rows = Files.lines(Paths.get("./assets/data.txt"));
+        Map<String, Integer> map = new HashMap<>();
+
+        map = rows //Source
+                .map(x -> x.split(",")) // operation 1
+                .filter(x -> x.length == 3) // operation 2
+                .collect(Collectors.toMap( // termination 
+                        x -> x[0],
+                        x -> Integer.parseInt(x[1])
+
+                ));
+
+        rows.close();
+
+        for (String key : map.keySet()) {
+            System.out.println(key + "-" + map.get(key));
+        }
+```
+### forEach
+```java
+            IntStream // source
+                .range(1, 10) // intermediate operation
+                .forEach(System.out::println); // terminal operation
+```
 
 ### IntStream
 ```java
@@ -74,26 +110,6 @@ Streams can be created from `Collections`, `Lists`, `ints`, `longs`, `doubles`, 
         System.out.println("Rows Count: " + rowCount);
 
         rows.close();
-```
-### Collect to map
-```java
-        Stream<String> rows = Files.lines(Paths.get("./assets/data.txt"));
-        Map<String, Integer> map = new HashMap<>();
-
-        map = rows //Source
-                .map(x -> x.split(",")) // operation 1
-                .filter(x -> x.length == 3) // operation 2
-                .collect(Collectors.toMap( // termination 
-                        x -> x[0],
-                        x -> Integer.parseInt(x[1])
-
-                ));
-
-        rows.close();
-
-        for (String key : map.keySet()) {
-            System.out.println(key + "-" + map.get(key));
-        }
 ```
 
 ### Example 1

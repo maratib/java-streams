@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 public class StreamTests {
 
     @Test
+    public void sample_stream_test() {
+        IntStream // source
+                .range(1, 10) // intermediate operation
+                .forEach(System.out::println); // intermediate operation
+    }
+
+    @Test
     public void int_stream_test() {
         IntStream // source
                 .range(1, 10) // intermediate operation
