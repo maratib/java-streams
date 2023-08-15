@@ -65,11 +65,31 @@ Streams can be created from `Collections`, `Lists`, `ints`, `longs`, `doubles`, 
         // F,6,3.4
         
         Stream<String> rows = Files.lines(Paths.get("./assets/data.txt"));
-        int rowCount = (int) rows
-                .map(x -> x.split(","))
-                .filter(x -> x.length == 3)
-                .count();
+        int rowCount = (int) rows // source 
+                .map(x -> x.split(",")) // operation 1
+                .filter(x -> x.length == 3) // operation 2
+                .count(); // termination
         System.out.println("Rows Count: " + rowCount);
 
         rows.close();
+```
+### Collect to map
+```java
+        Stream<String> rows = Files.lines(Paths.get("./assets/data.txt"));
+        Map<String, Integer> map = new HashMap<>();
+
+        map = rows //Source
+                .map(x -> x.split(",")) // operation 1
+                .filter(x -> x.length == 3) // operation 2
+                .collect(Collectors.toMap( // termination 
+                        x -> x[0],
+                        x -> Integer.parseInt(x[1])
+
+                ));
+
+        rows.close();
+
+        for (String key : map.keySet()) {
+            System.out.println(key + "-" + map.get(key));
+        }
 ```
