@@ -3,7 +3,7 @@
 ## Streams bring functional programming to Java 8+
 ## Advantages of Streams:-
 - Will make you more efficient Java Programmer
-- Make have use of `Lambda Expressions`
+- Make heavy use of `Lambda Expressions`
 - ParallelStreams make it very easy to multi-thread operations
 
 ## A Stream pipeline consists of a `Source`, <br /> followed by zero or more `intermediate operations`, <br /> and a `terminal operation`.
@@ -28,3 +28,48 @@ Streams can be created from `Collections`, `Lists`, `ints`, `longs`, `doubles`, 
 - `collect` saves the elements into a collection.
 - other options `reduce` the strem to s single summary element.
 - Includes: `count()`, `max()`, `min()`, `reduce()`, `summaryStatistics()`
+
+
+
+### IntStream
+```java
+            IntStream // source
+                .range(1, 10) // intermediate operation
+                .skip(5) // intermediate operation
+                .forEach(System.out::println); // terminal operatio
+```
+### Sort Stream
+```java
+            Stream // source
+                .of("Waleed", "Musa", "Maratib") // intermediate operation
+                .sorted() // intermediate operation
+                .findFirst() // intermediate operation
+                .ifPresent(System.out::println); // terminal operation
+```
+### Filter and Sort Stream
+```java
+            Stream // source
+                .of("Waleed", "Musa", "Maratib") // intermediate operation
+                .filter(x -> x.startsWith("M"))
+                .sorted() // intermediate operation
+                .forEach(System.out::println); // terminal
+```
+### Files Lines
+```java
+        //data.txt
+        // A,1,3.7
+        // B,2,2.8
+        // C,3,1.9
+        // D,4,2.7
+        // E
+        // F,6,3.4
+        
+        Stream<String> rows = Files.lines(Paths.get("./assets/data.txt"));
+        int rowCount = (int) rows
+                .map(x -> x.split(","))
+                .filter(x -> x.length == 3)
+                .count();
+        System.out.println("Rows Count: " + rowCount);
+
+        rows.close();
+```
