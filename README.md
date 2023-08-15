@@ -1,5 +1,7 @@
 # Java Streams (Filter, Map, Reduce)
 
+![Streams cheat sheet](./assets/img2.png "Streams cheat sheet")
+
 ## Streams bring functional programming to Java 8+
 ## Advantages of Streams:-
 - Will make you more efficient Java Programmer
@@ -92,4 +94,35 @@ Streams can be created from `Collections`, `Lists`, `ints`, `longs`, `doubles`, 
         for (String key : map.keySet()) {
             System.out.println(key + "-" + map.get(key));
         }
+```
+
+### Example 1
+```java
+        library.stream()
+          .map(book -> book.getAuthor())
+          .filter(author -> author.getAge() >= 50)
+          .map(Author::getSurname)
+          .map(String::toUpperCase)
+          .distinct()
+          .limit(15)
+          .collect(toList()));
+```
+### Example 2
+```java
+        library.stream()
+          .map(Book::getAuthor)
+          .filter(author -> author.getGender() == Gender.FEMALE)
+          .map(Author::getAge)
+          .filter(age -> age < 25)
+          .reduce(0, Integer::sum)
+```
+### Parallel Streams
+```java
+     library.parallelStream()...
+     IntStream.range(1, 10).parallel()...
+```
+### Example 3
+```java
+    List myList = new ArrayList<>();
+    library.parallelStream().forEach(e -> myList.add(e));
 ```
