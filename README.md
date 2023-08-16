@@ -1,8 +1,10 @@
 # Java Streams (Filter, Map, Reduce)
 
+### A `stream` is a `pipeline` of `functions` that can be `evaluated`. Java streams are not a data structure and cannot mutate data; they can only transform data.  
+## Streams bring functional programming to Java 8+
 ![Streams cheat sheet](./assets/img2.png "Streams cheat sheet")
 
-## Streams bring functional programming to Java 8+
+
 ## Advantages of Streams:-
 - Will make you more efficient Java Programmer
 - Make heavy use of `Lambda Expressions`
